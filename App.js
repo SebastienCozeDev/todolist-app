@@ -55,11 +55,24 @@ export default function App() {
     },
   ]);
 
+  function updateTodo(todo) {
+    const updatedTodo = {
+      ...todo,
+      isCompleted: !todo.isCompleted,
+    };
+    const indexToUpdate = todoList.findIndex(
+      (todo) => todo.id === updatedTodo.id
+    );
+    const updatedTodoList = [...todoList];
+    updatedTodoList[indexToUpdate] = updatedTodo;
+    setTodoList(updatedTodoList);
+  }
+
   function renderToDoList() {
     return todoList.map((todo) => {
       return (
         <View style={style.cardItem} key={todo.id}>
-          <CardTodo todo={todo} />
+          <CardTodo onPress={updateTodo} todo={todo} />
         </View>
       );
     });
