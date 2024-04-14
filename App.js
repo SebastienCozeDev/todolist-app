@@ -4,9 +4,11 @@ import React from "react";
 import {style} from "./App.style";
 import {Header} from "./components/Header/Header";
 import {CardTodo} from "./components/CardTodo/CardTodo";
+import {TabBottomMenu} from "./components/TabBottomMenu/TabBottomMenu";
 
 
 export default function App() {
+  const [selectedTabName, setSelectedTabName] = React.useState("all");
   const [todoList, setTodoList] = React.useState([
     {
       id: 1,
@@ -55,11 +57,35 @@ export default function App() {
     },
   ]);
 
+  function getFilteredList() {
+    switch (selectedTabName) {
+      case "all":
+        return todoList;
+      case "inProgress":
+        return todoList.filter((todo) => !todo.isCompleted);
+      case "done":
+        return todoList.filter((todo) => todo.isCompleted);
+    }
+  }
+
+  function updateTodo(todo) {
+    const updatedTodo = {
+      ...todo,
+      isCompleted: !todo.isCompleted,
+    };
+    const indexToUpdate = todoList.findIndex(
+      (todo) => todo.id === updatedTodo.id
+    );
+    const updatedTodoList = [...todoList];
+    updatedTodoList[indexToUpdate] = updatedTodo;
+    setTodoList(updatedTodoList);
+  }
+
   function renderToDoList() {
-    return todoList.map((todo) => {
+    return getFilteredList().map((todo) => {
       return (
         <View style={style.cardItem} key={todo.id}>
-          <CardTodo todo={todo} />
+          <CardTodo onPress={updateTodo} todo={todo} />
         </View>
       );
     });
@@ -78,7 +104,11 @@ export default function App() {
         </SafeAreaView>
       </SafeAreaProvider>
       <View style={style.footer}>
-        <Text>Footer</Text>
+        <TabBottomMenu
+          todoList={todoList}
+          onPress={setSelectedTabName}
+          selectedTabName={selectedTabName}
+        />
       </View>
     </>
   );
