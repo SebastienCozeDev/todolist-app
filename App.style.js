@@ -4,6 +4,7 @@ export const style = StyleSheet.create({
   app: {
     backgroundColor: "#F9F9F9",
     flex: 1,
+    padding: 10,
   },
   header: {
     flex: 1,
@@ -13,5 +14,9 @@ export const style = StyleSheet.create({
   },
   footer: {
     height: 70,
+  },
+  cardItem: {
+    marginTop: 2,
+    marginBottom: 18,
   },
 });
