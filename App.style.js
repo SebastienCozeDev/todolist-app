@@ -16,7 +16,7 @@ export const style = StyleSheet.create({
     height: 70,
   },
   cardItem: {
-    marginTop: 1,
-    marginBottom: 19,
+    marginTop: 2,
+    marginBottom: 18,
   },
 });

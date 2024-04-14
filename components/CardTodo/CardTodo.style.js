@@ -18,7 +18,7 @@ export const style = StyleSheet.create({
     shadowOpacity: .25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
   },
   text: {
     fontSize: 25,
