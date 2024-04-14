@@ -21,4 +21,7 @@ export const style = StyleSheet.create({
     marginTop: 2,
     marginBottom: 18,
   },
+  cardItemLast: {
+    paddingBottom: 50,
+  },
 });

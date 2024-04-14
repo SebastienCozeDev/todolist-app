@@ -62,6 +62,8 @@ export default function App() {
   const [isAddDialogVisible, setIsAddDialogVisible] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
 
+  const scrollViewRef = React.useRef();
+
   function getFilteredList() {
     switch (selectedTabName) {
       case "all":
@@ -138,7 +140,16 @@ export default function App() {
             <Header />
           </View>
           <View style={style.body}>
-            <ScrollView>{renderToDoList()}</ScrollView>
+            <ScrollView
+              ref={scrollViewRef}
+              onContentSizeChange={() => {
+                scrollViewRef.current.scrollToEnd({animated: true});
+              }}
+            >
+              {renderToDoList()}
+              <Text style={style.cardItemLast}>
+              </Text>
+            </ScrollView>
           </View>
           <ButtonAdd onPress={showAddDialog} />
         </SafeAreaView>
