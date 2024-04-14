@@ -35,27 +35,27 @@ You can then download the APK file from the [Expo website](https://expo.io/).
 
 ### Splash Screen
 
-![Splash Screen](./.screenshots/splash-screen.jpg)
+![Splash Screen](./screenshots/splash-screen.jpg)
 
 ### All Tasks Tab
 
-![All Tasks Tab](./.screenshots/all-tasks.jpg)
+![All Tasks Tab](./screenshots/all-tasks.jpg)
 
 ### Done Tasks Tab
 
-![Done Tasks Tab](./.screenshots/done-tasks.jpg)
+![Done Tasks Tab](./screenshots/done-tasks.jpg)
 
 ### In Progress Tasks Tab
 
-![Undone Tasks Tab](./.screenshots/in-progress-tasks.jpg)
+![Undone Tasks Tab](./screenshots/in-progress-tasks.jpg)
 
 ### Create Task Modal
 
-![Create Task Modal](./.screenshots/create-task.jpg)
+![Create Task Modal](./screenshots/create-task.jpg)
 
 ### Delete Task Modal
 
-![Delete Task Modal](./.screenshots/delete-task.jpg)
+![Delete Task Modal](./screenshots/delete-task.jpg)
 
 ## Features
 
