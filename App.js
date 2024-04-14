@@ -5,6 +5,9 @@ import {style} from "./App.style";
 import {Header} from "./components/Header/Header";
 import {CardTodo} from "./components/CardTodo/CardTodo";
 import {TabBottomMenu} from "./components/TabBottomMenu/TabBottomMenu";
+import {ButtonAdd} from "./components/ButtonAdd/ButtonAdd";
+import Dialog from "react-native-dialog";
+import uuid from "react-native-uuid";
 
 
 export default function App() {
@@ -56,6 +59,8 @@ export default function App() {
       isCompleted: true,
     },
   ]);
+  const [isAddDialogVisible, setIsAddDialogVisible] = React.useState(false);
+  const [inputValue, setInputValue] = React.useState("");
 
   function getFilteredList() {
     switch (selectedTabName) {
@@ -111,6 +116,20 @@ export default function App() {
     });
   }
 
+  function showAddDialog() {
+    setIsAddDialogVisible(true);
+  }
+
+  function addTodo() {
+    const newTodo = {
+      id: uuid.v4(),
+      title: inputValue,
+      isCompleted: false,
+    };
+    setTodoList([...todoList, newTodo]);
+    setIsAddDialogVisible(false);
+  }
+
   return (
     <>
       <SafeAreaProvider>
@@ -121,15 +140,20 @@ export default function App() {
           <View style={style.body}>
             <ScrollView>{renderToDoList()}</ScrollView>
           </View>
+          <ButtonAdd onPress={showAddDialog} />
         </SafeAreaView>
       </SafeAreaProvider>
-      <View style={style.footer}>
-        <TabBottomMenu
-          todoList={todoList}
-          onPress={setSelectedTabName}
-          selectedTabName={selectedTabName}
-        />
-      </View>
+      <TabBottomMenu
+        todoList={todoList}
+        onPress={setSelectedTabName}
+        selectedTabName={selectedTabName}
+      />
+      <Dialog.Container visible={isAddDialogVisible} onBackdropPress={() => setIsAddDialogVisible(false)}>
+        <Dialog.Title>Create a task</Dialog.Title>
+        <Dialog.Description>Choose a name for the new task</Dialog.Description>
+        <Dialog.Input onChangeText={setInputValue} />
+        <Dialog.Button disabled={inputValue.trim().length === 0} label={"Create"} onPress={() => addTodo()} />
+      </Dialog.Container>
     </>
   );
 }
