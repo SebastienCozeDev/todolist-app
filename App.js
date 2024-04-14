@@ -1,6 +1,6 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import {Alert, ScrollView, Text, View} from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
 import {style} from "./App.style";
 import {Header} from "./components/Header/Header";
 import {CardTodo} from "./components/CardTodo/CardTodo";
@@ -8,62 +8,78 @@ import {TabBottomMenu} from "./components/TabBottomMenu/TabBottomMenu";
 import {ButtonAdd} from "./components/ButtonAdd/ButtonAdd";
 import Dialog from "react-native-dialog";
 import uuid from "react-native-uuid";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
+let isFirstRender = true;
+let isLoadUpdate = false;
+
+/**
+ * Main component of the application.
+ *
+ * @return {JSX.Element} The main component of the application.
+ *
+ * @constructor
+ */
 export default function App() {
   const [selectedTabName, setSelectedTabName] = React.useState("all");
-  const [todoList, setTodoList] = React.useState([
-    {
-      id: 1,
-      title: "Buy milk",
-      isCompleted: true,
-    },
-    {
-      id: 2,
-      title: "Walk the dog",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      title: "Do homework",
-      isCompleted: true,
-    },
-    {
-      id: 4,
-      title: "Go to the gym",
-      isCompleted: true,
-    },
-    {
-      id: 5,
-      title: "Cook dinner",
-      isCompleted: false,
-    },
-    {
-      id: 6,
-      title: "Call dad",
-      isCompleted: false,
-    },
-    {
-      id: 7,
-      title: "Read a book",
-      isCompleted: false,
-    },
-    {
-      id: 8,
-      title: "Go to sleep",
-      isCompleted: false,
-    },
-    {
-      id: 9,
-      title: "Buy milk",
-      isCompleted: true,
-    },
-  ]);
+  const [todoList, setTodoList] = React.useState([]);
   const [isAddDialogVisible, setIsAddDialogVisible] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
 
   const scrollViewRef = React.useRef();
 
+  useEffect(() => {
+    loadTodoList().then(r => "Loaded");
+  }, []);
+
+  useEffect(() => {
+    if (isLoadUpdate) {
+      isLoadUpdate = false;
+    } else {
+      if (!isFirstRender) {
+        saveTodoList().then(r => "Saved");
+      } else {
+        isFirstRender = false;
+      }
+    }
+  }, [todoList]);
+
+  /**
+   * Saves the todo list to the local storage.
+   *
+   * @return {Promise<void>} A promise that resolves when the list is saved.
+   */
+  async function saveTodoList() {
+    try {
+      await AsyncStorage.setItem("@todolistcozedev", JSON.stringify(todoList));
+    } catch (e) {
+      alert("Failed to save the list");
+    }
+  }
+
+  /**
+   * Loads the todo list from the local storage.
+   *
+   * @return {Promise<void>} A promise that resolves when the list is loaded.
+   */
+  async function loadTodoList() {
+    try {
+      const stringifiedTodoList = await AsyncStorage.getItem("@todolistcozedev");
+      if (stringifiedTodoList !== null) {
+        isLoadUpdate = true;
+        setTodoList(JSON.parse(stringifiedTodoList));
+      }
+    } catch (e) {
+      alert("Failed to save the list");
+    }
+  }
+
+  /**
+   * Returns the todo list filtered by the selected tab.
+   *
+   * @return {*[]} The filtered todo list.
+   */
   function getFilteredList() {
     switch (selectedTabName) {
       case "all":
@@ -75,6 +91,11 @@ export default function App() {
     }
   }
 
+  /**
+   * Updates the todo list.
+   *
+   * @param todo The todo to update.
+   */
   function updateTodo(todo) {
     const updatedTodo = {
       ...todo,
@@ -88,6 +109,11 @@ export default function App() {
     setTodoList(updatedTodoList);
   }
 
+  /**
+   * Delete a todo.
+   *
+   * @param todoToDelete The todo to delete.
+   */
   function deleteTodo(todoToDelete) {
     Alert.alert(
       "Deletion",
@@ -108,6 +134,11 @@ export default function App() {
     );
   }
 
+  /**
+   * Renders the todo list.
+   *
+   * @return {[]} The rendered todo list.
+   */
   function renderToDoList() {
     return getFilteredList().map((todo) => {
       return (
@@ -118,10 +149,16 @@ export default function App() {
     });
   }
 
+  /**
+   * Shows the add dialog.
+   */
   function showAddDialog() {
     setIsAddDialogVisible(true);
   }
 
+  /**
+   * Adds a todo to the list.
+   */
   function addTodo() {
     const newTodo = {
       id: uuid.v4(),
