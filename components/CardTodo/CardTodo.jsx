@@ -5,7 +5,7 @@ import {style} from "./CardTodo.style";
 
 export function CardTodo(props) {
   return (
-    <TouchableOpacity onPress={() => props.onPress(props.todo)} style={style.card}>
+    <TouchableOpacity onLongPress={() => props.onLongPress(props.todo)} onPress={() => props.onPress(props.todo)} style={style.card}>
       <Text
         style={[
           style.text,
