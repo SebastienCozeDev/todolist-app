@@ -4,9 +4,11 @@ import React from "react";
 import {style} from "./App.style";
 import {Header} from "./components/Header/Header";
 import {CardTodo} from "./components/CardTodo/CardTodo";
+import {TabBottomMenu} from "./components/TabBottomMenu/TabBottomMenu";
 
 
 export default function App() {
+  const [selectedTabName, setSelectedTabName] = React.useState("all");
   const [todoList, setTodoList] = React.useState([
     {
       id: 1,
@@ -91,7 +93,10 @@ export default function App() {
         </SafeAreaView>
       </SafeAreaProvider>
       <View style={style.footer}>
-        <Text>Footer</Text>
+        <TabBottomMenu
+          onPress={setSelectedTabName}
+          selectedTabName={selectedTabName}
+        />
       </View>
     </>
   );

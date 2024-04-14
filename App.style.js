@@ -5,6 +5,7 @@ export const style = StyleSheet.create({
     backgroundColor: "#F9F9F9",
     flex: 1,
     padding: 10,
+    paddingBottom: 0,
   },
   header: {
     flex: 1,
@@ -14,6 +15,7 @@ export const style = StyleSheet.create({
   },
   footer: {
     height: 70,
+    marginBottom: -10,
   },
   cardItem: {
     marginTop: 2,
