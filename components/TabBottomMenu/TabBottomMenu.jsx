@@ -1,6 +1,15 @@
 import {Text, TouchableOpacity, View} from "react-native";
 import {style} from "./TabBottomMenu.style";
 
+/**
+ * TabBottomMenu component.
+ *
+ * @param props Props for the component.
+ *
+ * @return {JSX.Element} TabBottomMenu component.
+ *
+ * @constructor
+ */
 export function TabBottomMenu(props) {
 
   const countByStatus = props.todoList.reduce((acc, todo) => {

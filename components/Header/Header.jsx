@@ -2,6 +2,13 @@ import {Image, Text} from "react-native";
 import {style} from "./Header.style";
 import headerLogo from "../../assets/logo.png";
 
+/**
+ * Header component.
+ *
+ * @return {JSX.Element} Header component.
+ *
+ * @constructor
+ */
 export function Header() {
   return (
     <>
