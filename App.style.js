@@ -24,4 +24,7 @@ export const style = StyleSheet.create({
   cardItemLast: {
     paddingBottom: 50,
   },
+  dialogInput: {
+    color: "#000",
+  },
 });
