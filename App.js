@@ -1,5 +1,5 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import {Alert, ScrollView, Text, View} from "react-native";
+import {Alert, ScrollView, StatusBar, Text, View} from "react-native";
 import React, {useEffect} from "react";
 import {style} from "./App.style";
 import {Header} from "./components/Header/Header";
@@ -171,6 +171,7 @@ export default function App() {
 
   return (
     <>
+      <StatusBar barStyle={"dark-content"} backgroundColor="white" />
       <SafeAreaProvider>
         <SafeAreaView style={style.app}>
           <View style={style.header}>
@@ -199,7 +200,7 @@ export default function App() {
       <Dialog.Container visible={isAddDialogVisible} onBackdropPress={() => setIsAddDialogVisible(false)}>
         <Dialog.Title>Create a task</Dialog.Title>
         <Dialog.Description>Choose a name for the new task</Dialog.Description>
-        <Dialog.Input onChangeText={setInputValue} />
+        <Dialog.Input onChangeText={setInputValue} style={style.dialogInput} />
         <Dialog.Button disabled={inputValue.trim().length === 0} label={"Create"} onPress={() => addTodo()} />
       </Dialog.Container>
     </>
