@@ -1,5 +1,5 @@
-import {Text, TouchableOpacity} from "react-native";
-import {style} from "./ButtonAdd.style";
+import { Text, TouchableOpacity } from "react-native";
+import { style } from "./ButtonAdd.style";
 
 /**
  * ButtonAdd component.

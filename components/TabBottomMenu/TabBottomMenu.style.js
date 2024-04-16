@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const style = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ export const style = StyleSheet.create({
       width: 0,
       height: 5,
     },
-    shadowOpacity: .34,
+    shadowOpacity: 0.34,
     shadowRadius: 6.27,
     elevation: 10,
   },
