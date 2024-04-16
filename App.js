@@ -1,15 +1,14 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import {Alert, ScrollView, StatusBar, Text, View} from "react-native";
-import React, {useEffect} from "react";
-import {style} from "./App.style";
-import {Header} from "./components/Header/Header";
-import {CardTodo} from "./components/CardTodo/CardTodo";
-import {TabBottomMenu} from "./components/TabBottomMenu/TabBottomMenu";
-import {ButtonAdd} from "./components/ButtonAdd/ButtonAdd";
+import { Alert, ScrollView, StatusBar, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { style } from "./App.style";
+import { Header } from "./components/Header/Header";
+import { CardTodo } from "./components/CardTodo/CardTodo";
+import { TabBottomMenu } from "./components/TabBottomMenu/TabBottomMenu";
+import { ButtonAdd } from "./components/ButtonAdd/ButtonAdd";
 import Dialog from "react-native-dialog";
 import uuid from "react-native-uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 
 let isFirstRender = true;
 let isLoadUpdate = false;
@@ -30,7 +29,7 @@ export default function App() {
   const scrollViewRef = React.useRef();
 
   useEffect(() => {
-    loadTodoList().then(r => "Loaded");
+    loadTodoList().then((r) => "Loaded");
   }, []);
 
   useEffect(() => {
@@ -38,7 +37,7 @@ export default function App() {
       isLoadUpdate = false;
     } else {
       if (!isFirstRender) {
-        saveTodoList().then(r => "Saved");
+        saveTodoList().then((r) => "Saved");
       } else {
         isFirstRender = false;
       }
@@ -65,7 +64,8 @@ export default function App() {
    */
   async function loadTodoList() {
     try {
-      const stringifiedTodoList = await AsyncStorage.getItem("@todolistcozedev");
+      const stringifiedTodoList =
+        await AsyncStorage.getItem("@todolistcozedev");
       if (stringifiedTodoList !== null) {
         isLoadUpdate = true;
         setTodoList(JSON.parse(stringifiedTodoList));
@@ -102,7 +102,7 @@ export default function App() {
       isCompleted: !todo.isCompleted,
     };
     const indexToUpdate = todoList.findIndex(
-      (todo) => todo.id === updatedTodo.id
+      (todo) => todo.id === updatedTodo.id,
     );
     const updatedTodoList = [...todoList];
     updatedTodoList[indexToUpdate] = updatedTodo;
@@ -115,23 +115,19 @@ export default function App() {
    * @param todoToDelete The todo to delete.
    */
   function deleteTodo(todoToDelete) {
-    Alert.alert(
-      "Deletion",
-      "Delete this task?",
-      [
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            setTodoList(todoList.filter((todo) => todo.id !== todoToDelete.id));
-          },
+    Alert.alert("Deletion", "Delete this task?", [
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => {
+          setTodoList(todoList.filter((todo) => todo.id !== todoToDelete.id));
         },
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-      ],
-    );
+      },
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+    ]);
   }
 
   /**
@@ -181,12 +177,11 @@ export default function App() {
             <ScrollView
               ref={scrollViewRef}
               onContentSizeChange={() => {
-                scrollViewRef.current.scrollToEnd({animated: true});
+                scrollViewRef.current.scrollToEnd({ animated: true });
               }}
             >
               {renderToDoList()}
-              <Text style={style.cardItemLast}>
-              </Text>
+              <Text style={style.cardItemLast}></Text>
             </ScrollView>
           </View>
           <ButtonAdd onPress={showAddDialog} />
@@ -197,11 +192,18 @@ export default function App() {
         onPress={setSelectedTabName}
         selectedTabName={selectedTabName}
       />
-      <Dialog.Container visible={isAddDialogVisible} onBackdropPress={() => setIsAddDialogVisible(false)}>
+      <Dialog.Container
+        visible={isAddDialogVisible}
+        onBackdropPress={() => setIsAddDialogVisible(false)}
+      >
         <Dialog.Title>Create a task</Dialog.Title>
         <Dialog.Description>Choose a name for the new task</Dialog.Description>
         <Dialog.Input onChangeText={setInputValue} style={style.dialogInput} />
-        <Dialog.Button disabled={inputValue.trim().length === 0} label={"Create"} onPress={() => addTodo()} />
+        <Dialog.Button
+          disabled={inputValue.trim().length === 0}
+          label={"Create"}
+          onPress={() => addTodo()}
+        />
       </Dialog.Container>
     </>
   );

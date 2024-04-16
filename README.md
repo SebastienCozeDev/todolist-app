@@ -18,17 +18,21 @@ npm install
 ## Usage
 
 To run the project, use the following command:
+
 ```bash
 npx expo start
 ```
+
 You can then use the Expo Go app on your phone to scan the QR code and run the app on your phone.
 
 ## Build
 
 To build the project, use the following command:
+
 ```bash
 eas build -p android --profile preview
 ```
+
 You can then download the APK file from the [Expo website](https://expo.io/).
 
 ## Screenshots
