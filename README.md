@@ -4,7 +4,7 @@ This project is a todolist mobile app make in React Native and Expo.
 
 # Informations
 
-- [Download the app for Android](https://github.com/SebastienCozeDev/todolist-app/releases/download/v1.0.0/todolist-app-latest.apk).
+- [Download the app for Android](https://github.com/SebastienCozeDev/todolist-app/releases/download/v1.0.1/todolist-app-latest.apk).
 - [View code](https://github.com/SebastienCozeDev/todolist-app).
 
 ## Installation
