@@ -1,5 +1,5 @@
-import {Image, Text} from "react-native";
-import {style} from "./Header.style";
+import { Image, Text } from "react-native";
+import { style } from "./Header.style";
 import headerLogo from "../../assets/logo.png";
 
 /**
