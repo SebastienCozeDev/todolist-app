@@ -4,7 +4,7 @@ Ce projet est une application mobile todolist développée en React Native et av
 
 # Informations
 
-- [Télécharger l'app pour Android](https://github.com/SebastienCozeDev/todolist-app/releases/download/v1.0.1/todolist-app-latest.apk).
+- [Télécharger l'app pour Android](https://github.com/SebastienCozeDev/todolist-app/releases/download/v1.0.1/todolist-app-1.0.1.apk).
 - [Voir le code](https://github.com/SebastienCozeDev/todolist-app).
 
 ## Installation
